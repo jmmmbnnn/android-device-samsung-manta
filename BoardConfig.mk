@@ -27,6 +27,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/manta/bluetooth
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a15
@@ -60,6 +61,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 553648128
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
 
+#TARGET_PROVIDES_INIT_RC := true
 #TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 
 # Wifi related defines
@@ -80,6 +82,20 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_manta
 TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/manta
 
-BOARD_SEPOLICY_DIRS += device/samsung/manta/sepolicy
+BOARD_SEPOLICY_DIRS += \
+	device/samsung/manta/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+	file_contexts \
+	device.te \
+	domain.te \
+	drmserver.te \
+	healthd.te \
+	gpsd.te \
+	file.te \
+	mediaserver.te \
+	system_server.te
 
 MALLOC_IMPL := dlmalloc
+
+BOARD_INV_LIBMLLITE_FROM_SOURCE := true
